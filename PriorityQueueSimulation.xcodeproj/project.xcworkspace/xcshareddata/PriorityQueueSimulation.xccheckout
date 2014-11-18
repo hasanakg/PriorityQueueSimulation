@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>0D5BA97F-641C-4126-8620-B793E16B2E6A</string>
+	<key>IDESourceControlProjectName</key>
+	<string>PriorityQueueSimulation</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>B7131DB6D88B2D29874D59B4BB1ACF797259A43D</key>
+		<string>https://github.com/hasanakg/PriorityQueueSimulation</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>PriorityQueueSimulation.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>B7131DB6D88B2D29874D59B4BB1ACF797259A43D</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/hasanakg/PriorityQueueSimulation</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>B7131DB6D88B2D29874D59B4BB1ACF797259A43D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B7131DB6D88B2D29874D59B4BB1ACF797259A43D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>PriorityQueueSimulation</string>
+		</dict>
+	</array>
+</dict>
+</plist>
