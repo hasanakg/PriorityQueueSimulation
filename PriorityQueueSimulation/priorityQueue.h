@@ -25,18 +25,20 @@ private:
     int d,m,n,logLevel;
     int insertCount, updateCount, removeCount, operationCount, errorCount;
     double p;
+    
     void maxHeapify(int);
-public:
     void buildMaxHeap();
-    priorityQueue(string, int, int, int, double);
     void heapSort();
+    void log(string, int);
+public:
+    priorityQueue(string, int, int, int, double);
+    void insert(int);
+    void update(int, int);
+    void remove(int);
     int maximum();
     int extractMax();
-    void update(int, int);
-    void insert(int);
-    void remove(int);
     void print();
-    void log(string, int);
+    void output(string);
 };
 
 

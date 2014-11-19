@@ -11,6 +11,7 @@
 #include "priorityQueue.h"
 
 int main(int argc, const char * argv[]) {
+    
     priorityQueue queue("/Users/hasanakg/Downloads/scores.txt", 2, 10, 100000, 0.80);
     return 0;
 }
