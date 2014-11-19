@@ -25,6 +25,8 @@ private:
     int d,m,n,logLevel;
     int insertCount, updateCount, removeCount, operationCount, errorCount;
     double p;
+    double cpu_time_used;
+    
     
     void maxHeapify(int);
     void buildMaxHeap();

@@ -12,6 +12,17 @@
 
 int main(int argc, const char * argv[]) {
     
-    priorityQueue queue("/Users/hasanakg/Downloads/scores.txt", 2, 10, 100000, 0.80);
+    int d,n,m;
+    double p;
+    
+    d = atoi(argv[1]);
+    m = atoi(argv[2]);
+    n = atoi(argv[3]);
+    p = atof(argv[4]);
+    
+
+    priorityQueue queue("/Users/hasanakg/Downloads/scores.txt", d, m, n, p);
+
+    
     return 0;
 }

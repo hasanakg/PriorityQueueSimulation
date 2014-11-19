@@ -10,8 +10,8 @@
 #include <fstream>
 #include <ctime>
 
-priorityQueue::priorityQueue(string path, int dIn, int nIn, int mIn, double pIn) {
-    d = dIn; // d-ary tree
+priorityQueue::priorityQueue(string path, int dIn, int mIn, int nIn, double pIn) {
+    d = 2; // d-ary tree
     n = nIn; // After M operations, N applicants will be invited
     m = mIn; // After M operation, simulation will stop
     p = pIn; // Every operation is an update with probability p
@@ -23,26 +23,30 @@ priorityQueue::priorityQueue(string path, int dIn, int nIn, int mIn, double pIn)
     errorCount = 0;
     heapSize = (int)array.size();
     
-    logLevel = 1; // 0 Errors 1 Infos
+    logLevel = 2; // 0 Errors 1 Infos
     
     ifstream inputFile;
     inputFile.open(path);
-
-    srand((unsigned)time(0));
-
+    
+    srand((unsigned)time(NULL));
+    
     if(!inputFile.is_open()) {
-        log("ERROR:\tFile not exists!", 0);
+        //log("ERROR:\tFile not exists!", 0);
         return;
     }
     
     string line, eng, math, gpa;
     getline(inputFile, line, '\n');
     
+    clock_t start, end;
+    
+    start = clock();
+    
     for (operationCount = 0; operationCount < m;) { // After M operation, simulation will stop
         double rnd = (double)rand()/RAND_MAX; //Random value between 0-1
         if(rnd <= p) {
             if(array.size() == 0) {
-                log("ERROR:\tHeap is empty!", 0);
+                //log("ERROR:\tHeap is empty!", 0);
             }
             else
             {
@@ -50,7 +54,7 @@ priorityQueue::priorityQueue(string path, int dIn, int nIn, int mIn, double pIn)
                 int key = rand() % 21 - 10;
                 int val = array[i];
                 update(i, array[i]+key);
-                log("UPDATE:\t Index:\t" + to_string(i) + " updated from\t" + to_string(val) + "to\t" + to_string(array[i]), 1);
+                //log("UPDATE:\t Index:\t" + to_string(i) + " updated from\t" + to_string(val) + "to\t" + to_string(array[i]), 1);
                 operationCount++;
                 updateCount++;
             }
@@ -59,7 +63,7 @@ priorityQueue::priorityQueue(string path, int dIn, int nIn, int mIn, double pIn)
             inputFile >> eng >> math >> gpa; //Read marks
             
             insert(stod(eng)*0.25 + stod(math)*0.30 + stod(gpa)*0.45);
-            log("INSERT:\t Value: \t" + to_string(array[array.size()-1]), 1);
+            //log("INSERT:\t Value: \t" + to_string(array[array.size()-1]), 1);
             operationCount++;
             insertCount++;
         }
@@ -71,7 +75,7 @@ priorityQueue::priorityQueue(string path, int dIn, int nIn, int mIn, double pIn)
                 int i = rand() % array.size();
                 int val = array[i];
                 remove(i);
-                log("REMOVE:\t Index:\t " + to_string(i) + "\tValue: \t" + to_string(val), 1);
+                //log("REMOVE:\t Index:\t " + to_string(i) + "\tValue: \t" + to_string(val), 1);
                 operationCount++;
                 removeCount++;
             }
@@ -81,15 +85,23 @@ priorityQueue::priorityQueue(string path, int dIn, int nIn, int mIn, double pIn)
         n = (int)array.size();
     }
     for (int i = 0; i < n; i++) {
-        log("MAX-REMOVE:\t Value:\t" + to_string(extractMax()), 1);
+        //log("MAX-REMOVE:\t Value:\t" + to_string(extractMax()), 1);
+        extractMax();
     }
+    
+    end = clock();
+    cpu_time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
+    
+    cout << cpu_time_used << endl;
+    
+    
     output("/Users/hasanakg/Desktop/output.txt");
     
     inputFile.close();
 }
 
 void priorityQueue::maxHeapify(int i) {
-
+    
     int largest = i;
     
     
@@ -123,7 +135,7 @@ void priorityQueue::heapSort() {
         heapSize--;
         maxHeapify(0);
         print();
-
+        
     }
     heapSize = (int)array.size();
 }
@@ -163,7 +175,7 @@ void priorityQueue::update(int i, int key) {
         i = parent;
         parent = (i-1)/d;
     }
-
+    
 }
 
 void priorityQueue::insert(int key) {
@@ -194,7 +206,7 @@ void priorityQueue::log(string str, int level) {
 
 void priorityQueue::output(string path) {
     ofstream outputFile(path);
-    
+    /*
     outputFile << "Operation count: \t" << operationCount <<  endl;
     outputFile << "Insert count: \t\t" << insertCount << endl;
     outputFile << "Remove count: \t\t" << removeCount << endl;
@@ -202,6 +214,12 @@ void priorityQueue::output(string path) {
     outputFile << "Error count: \t\t" << errorCount << endl;
     outputFile << "Removed max count: \t" << n << endl;
     outputFile << "Total applicants: \t" << array.size() << endl;
+    */
+    
+    outputFile << "Total applicants \t: " << insertCount << endl;
+    outputFile << "Number of updates \t: " << updateCount << endl;
+    outputFile << "Invited applicants \t: " << n << endl;
+    outputFile << "Time elapsed \t\t: " << cpu_time_used*1000 << endl;
     
     outputFile.close();
 }
