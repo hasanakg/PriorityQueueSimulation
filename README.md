@@ -16,6 +16,8 @@ For each simulation step, a random applicant withdraws his/her application with 
 Simulation stops after M add, update or remove operations.
 
 Usage
-=======================
+-----
 
+```
 ./pq d M N P
+```
