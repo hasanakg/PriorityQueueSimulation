@@ -11,10 +11,10 @@
 #include <ctime>
 
 priorityQueue::priorityQueue(string path, int dIn, int nIn, int mIn, double pIn) {
-    d = dIn;
-    n = nIn;
-    m = mIn;
-    p = pIn;
+    d = dIn; // d-ary tree
+    n = nIn; // After M operations, N applicants will be invited
+    m = mIn; // After M operation, simulation will stop
+    p = pIn; // Every operation is an update with probability p
     
     operationCount = 0;
     insertCount = 0;
@@ -37,8 +37,9 @@ priorityQueue::priorityQueue(string path, int dIn, int nIn, int mIn, double pIn)
     
     string line, eng, math, gpa;
     getline(inputFile, line, '\n');
-    for (operationCount = 0; operationCount < m;) {
-        double rnd = (double)rand()/RAND_MAX;
+    
+    for (operationCount = 0; operationCount < m;) { // After M operation, simulation will stop
+        double rnd = (double)rand()/RAND_MAX; //Random value between 0-1
         if(rnd <= p) {
             if(array.size() == 0) {
                 log("ERROR:\tHeap is empty!", 0);
@@ -55,16 +56,8 @@ priorityQueue::priorityQueue(string path, int dIn, int nIn, int mIn, double pIn)
             }
         }
         else {
-            size_t pos = 0;
-            getline(inputFile, line, '\n');
-            pos = line.find('\t');
-            eng = line.substr(0, pos);
-            line.erase(0, pos + 1);
-            pos = line.find('\t');
-            math = line.substr(0, pos);
-            line.erase(0, pos + 1);
-            gpa = line;
-            //array.push_back();
+            inputFile >> eng >> math >> gpa; //Read marks
+            
             insert(stod(eng)*0.25 + stod(math)*0.30 + stod(gpa)*0.45);
             log("INSERT:\t Value: \t" + to_string(array[array.size()-1]), 1);
             operationCount++;
@@ -90,14 +83,9 @@ priorityQueue::priorityQueue(string path, int dIn, int nIn, int mIn, double pIn)
     for (int i = 0; i < n; i++) {
         log("MAX-REMOVE:\t Value:\t" + to_string(extractMax()), 1);
     }
+    output("/Users/hasanakg/Desktop/output.txt");
     
-    cout << "Operation count: \t" << operationCount <<  endl;
-    cout << "Insert count: \t\t" << insertCount << endl;
-    cout << "Remove count: \t\t" << removeCount << endl;
-    cout << "Update count: \t\t" << updateCount << endl;
-    cout << "Error count: \t\t" << errorCount << endl;
-    cout << "Removed max count: \t" << n << endl;
-    cout << "Total applicants: \t" << array.size() << endl;
+    inputFile.close();
 }
 
 void priorityQueue::maxHeapify(int i) {
@@ -202,4 +190,18 @@ void priorityQueue::log(string str, int level) {
         errorCount++;
     if(level >= logLevel)
         cout << str << endl;
+}
+
+void priorityQueue::output(string path) {
+    ofstream outputFile(path);
+    
+    outputFile << "Operation count: \t" << operationCount <<  endl;
+    outputFile << "Insert count: \t\t" << insertCount << endl;
+    outputFile << "Remove count: \t\t" << removeCount << endl;
+    outputFile << "Update count: \t\t" << updateCount << endl;
+    outputFile << "Error count: \t\t" << errorCount << endl;
+    outputFile << "Removed max count: \t" << n << endl;
+    outputFile << "Total applicants: \t" << array.size() << endl;
+    
+    outputFile.close();
 }
